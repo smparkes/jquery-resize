@@ -71,6 +71,7 @@
   // loop executes. Defaults to 250.
   
   jq_resize[ str_delay ] = 250;
+  jq_resize[ str_delay ] = 2000;
   
   // Property: jQuery.resize.throttleWindow
   // 
@@ -217,16 +218,19 @@
   };
   
   function loopy() {
-    
+
     // Start the polling loop, asynchronously.
     timeout_id = window[ str_setTimeout ](function(){
       
       // Iterate over all elements to which the 'resize' event is bound.
       elems.each(function(){
+        // console.debug($(this)[0]);
+        // console.time("loopy");
         var elem = $(this),
           width = elem.width(),
           height = elem.height(),
           data = $.data( this, str_data );
+        // console.timeEnd("loopy");
         
         // If element size has changed since the last time, update the element
         // data store and trigger the 'resize' event.
